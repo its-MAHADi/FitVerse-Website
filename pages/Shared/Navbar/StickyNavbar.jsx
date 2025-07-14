@@ -22,10 +22,10 @@ export function StickyNavbar() {
   const navList = (
     <ul className="flex flex-col lg:flex-row lg:items-center font-semibold gap-6">
          <NavLink className={({isActive})=>(isActive? "bg-blue-600 px-2 py-1 rounded-md text-white" : "")} to="/">Home</NavLink>
-          <NavLink  className={({isActive})=>(isActive? "bg-blue-600 px-2 py-1 rounded-md text-white" : "")} to="/add-blog">All Trainers</NavLink>
-          <NavLink  className={({isActive})=>(isActive? "bg-blue-600 px-2 py-1 rounded-md text-white" : "")} to="/all-blog">All Classes</NavLink>
-          <NavLink  className={({isActive})=>(isActive? "bg-blue-600 px-2 py-1 rounded-md text-white" : "")} to="/Featured-blog">Community</NavLink>
-          <NavLink  className={({isActive})=>(isActive? "bg-blue-600 px-2 py-1 rounded-md text-white" : "")} to="/Wishlist"> Dashboard</NavLink>
+          <NavLink  className={({isActive})=>(isActive? "bg-blue-600 px-2 py-1 rounded-md text-white" : "")} to="/all-trainers">All Trainers</NavLink>
+          <NavLink  className={({isActive})=>(isActive? "bg-blue-600 px-2 py-1 rounded-md text-white" : "")} to="/all-classes">All Classes</NavLink>
+          <NavLink  className={({isActive})=>(isActive? "bg-blue-600 px-2 py-1 rounded-md text-white" : "")} to="/community">Community</NavLink>
+          <NavLink  className={({isActive})=>(isActive? "bg-blue-600 px-2 py-1 rounded-md text-white" : "")} to="/dashboard"> Dashboard</NavLink>
     </ul>
   );
 
@@ -101,12 +101,12 @@ export function StickyNavbar() {
           {navList}
         </div>
         <div className="flex gap-2">
-          <Link to="/login" className="w-full">
+          <Link to="/login" className="w-full bg-gray-300 rounded-md">
             <Button fullWidth variant="text" size="sm">
               Log In
             </Button>
           </Link>
-          <Link to="/register" className="w-full">
+          <Link to="/register" className="w-full bg-green-600 rounded-md">
             <Button fullWidth variant="gradient" size="sm">
               Sign Up
             </Button>

@@ -31,7 +31,7 @@ export function StickyNavbar() {
 
   return (
     <Navbar
-      className="sticky top-0 z-50 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4 bg-white/50 backdrop-blur-md shadow-sm text-black"
+      className="sticky top-0 z-50 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4 bg-white/50 backdrop-blur-md shadow-sm text-black border-none"
     >
       <div className="flex items-center justify-between">
         {/* Logo */}
@@ -51,12 +51,12 @@ export function StickyNavbar() {
         {/* Right buttons */}
         <div className="hidden lg:flex items-center gap-5">
           <Link to="/login">
-            <Button className="bg-gray-200 px-4 py-2 rounded-md" variant="text" size="lg">
+            <Button className="bg-gray-200 px-4 py-2 rounded-md cursor-pointer" variant="text" size="lg">
               Log In
             </Button>
           </Link>
-          <Link to="/register">
-            <Button className="text-black border-1 px-3 py-2 rounded-md hover:bg-green-600 hover:text-white" variant="gradient" size="lg">
+          <Link to="/signup">
+            <Button className="text-black border-1 px-3 py-2 rounded-md hover:bg-green-600 hover:text-white cursor-pointer" variant="gradient" size="lg">
               Sign Up
             </Button>
           </Link>
@@ -101,7 +101,7 @@ export function StickyNavbar() {
           {navList}
         </div>
         <div className="flex gap-2">
-          <Link to="/login" className="w-full bg-gray-300 rounded-md">
+          <Link to="/login" className="w-full bg-gray-300 rounded-md ">
             <Button fullWidth variant="text" size="sm">
               Log In
             </Button>

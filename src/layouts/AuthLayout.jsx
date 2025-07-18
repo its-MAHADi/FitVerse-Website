@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { Outlet } from 'react-router'
-import { StickyNavbar } from '../../pages/Shared/Navbar/StickyNavbar'
+import StickyNavbar from '../pages/Shared/Navbar/StickyNavbar'
 
 const AuthLayout = () => {
   return (

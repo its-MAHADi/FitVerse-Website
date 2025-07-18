@@ -3,7 +3,7 @@ import React from 'react'
 const AllClasses = () => {
   return (
     <div>
-      All Classes page
+        All Classes page
     </div>
   )
 }

@@ -1,15 +1,19 @@
 import React from "react";
-import {
-  Navbar,
-  Typography,
-  IconButton,
-  Button,
-  MobileNav,
-} from "@material-tailwind/react";
+import {Navbar,Typography,IconButton,Button,MobileNav,} from "@material-tailwind/react";
 import { Link, NavLink } from "react-router"; 
+import UseAuth from "../../../Hooks/UseAuth";
+import toast from "react-hot-toast";
 
-export function StickyNavbar() {
-  const [openNav, setOpenNav] = React.useState(false);
+const StickyNavbar = () => {
+   const [openNav, setOpenNav] = React.useState(false);
+    const {user, logOut}=UseAuth();
+     const handleLogOut=()=>{
+    logOut().then(() => {
+      toast.success('Logged out successfully!');
+    }).catch((error) => {
+      toast.error(`Logout failed: ${error.message}`);
+    });
+    }
 
   React.useEffect(() => {
     const handleResize = () => {
@@ -28,9 +32,8 @@ export function StickyNavbar() {
           <NavLink  className={({isActive})=>(isActive? "bg-blue-600 px-2 py-1 rounded-md text-white" : "")} to="/dashboard"> Dashboard</NavLink>
     </ul>
   );
-
   return (
-    <Navbar
+     <Navbar
       className="sticky top-0 z-50 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4 bg-white/50 backdrop-blur-md shadow-sm text-black border-none"
     >
       <div className="flex items-center justify-between">
@@ -50,13 +53,20 @@ export function StickyNavbar() {
 
         {/* Right buttons */}
         <div className="hidden lg:flex items-center gap-5">
-          <Link to="/login">
+          {/* <Link to="/login">
             <Button className="bg-gray-200 px-4 py-2 rounded-md cursor-pointer" variant="text" size="lg">
               Log In
             </Button>
-          </Link>
+          </Link> */}
+
+
+         {
+         user? <Button onClick={handleLogOut}  variant="text" size="sm" className="bg-red-500 text-white rounded-md cursor-pointer" >Logout </Button> :  <Link to="login" className=" bg-gray-300 rounded-md"><Button className="cursor-pointer " fullWidth variant="text" size="sm">Log In </Button></Link>
+         }
+
+
           <Link to="/signup">
-            <Button className="text-black border-1 px-3 py-2 rounded-md hover:bg-green-600 hover:text-white cursor-pointer" variant="gradient" size="lg">
+            <Button className="text-black border-1 px-4 py-2 rounded-md hover:bg-green-600 hover:text-white cursor-pointer" variant="gradient" size="lg">
               Sign Up
             </Button>
           </Link>
@@ -101,11 +111,17 @@ export function StickyNavbar() {
           {navList}
         </div>
         <div className="flex gap-2">
-          <Link to="/login" className="w-full bg-gray-300 rounded-md ">
+          {/* <Link to="/login" className="w-full bg-gray-300 rounded-md ">
             <Button fullWidth variant="text" size="sm">
               Log In
             </Button>
-          </Link>
+          </Link> */}
+
+
+         {
+        user? <Button onClick={handleLogOut} fullWidth variant="text" size="sm" className="bg-red-500 text-white rounded-md" >Logout </Button> :  <Link to="login" className="w-full bg-gray-300 rounded-md "><Button fullWidth variant="text" size="sm">Log In </Button></Link>
+         }
+
           <Link to="/register" className="w-full bg-green-600 rounded-md">
             <Button fullWidth variant="gradient" size="sm">
               Sign Up
@@ -114,5 +130,7 @@ export function StickyNavbar() {
         </div>
       </MobileNav>
     </Navbar>
-  );
+  )
 }
+
+export default StickyNavbar

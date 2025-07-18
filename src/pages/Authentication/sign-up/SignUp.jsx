@@ -1,15 +1,44 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link } from 'react-router';
+import UseAuth from '../../../Hooks/UseAuth';
+import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
 
 const SignUp = () => {
- const [showPassword,setShowPassword] = useState(false)
+    const {register,handleSubmit,formState: {errors}} = useForm();
+    const { createUser} = UseAuth();
+
+
+     const [showPassword,setShowPassword] = useState(false)
+
+    const onSubmit = data =>{
+        createUser(data.email,data.password)
+        .then(result => {
+          const user = result.user;
+           Swal.fire({
+              position: "top-bottom",
+              icon: "success",
+              title: "Sign Up successful!",
+              showConfirmButton: false,
+              timer: 1500
+               });
+        })
+        .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+           toast.error(`Registration failed: ${errorMessage}`);
+    // ..
+  });
+    }   
+
   return (
     <div className="flex items-center justify-center bg-gray-100 px-4 py-6">
       <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
         <h2 className="text-3xl font-bold text-center text-blue-600 mb-6">Create an Account</h2>
 
-        <form className="space-y-5">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           {/* Name */}
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
@@ -17,6 +46,7 @@ const SignUp = () => {
             </label>
             <input
               type="text"
+              {...register('name')}
               id="name"
               placeholder="Enter your name"
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -31,6 +61,7 @@ const SignUp = () => {
             </label>
             <input
               type="email"
+              {...register('email')}
               id="email"
               placeholder="example@gmail.com"
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -45,6 +76,7 @@ const SignUp = () => {
             </label>
             <input
               type="text"
+              {...register('photoURL')}
               id="photoURL"
               placeholder="https://image.com/profile.jpg"
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -60,7 +92,8 @@ const SignUp = () => {
             <input
               name='password' 
               type={showPassword ? 'text' : 'password'}
-              placeholder="********"
+              {...register('password',{minLength:6})}
+              placeholder="******"
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
@@ -69,6 +102,9 @@ const SignUp = () => {
                 showPassword ? <FaEyeSlash /> : <FaEye /> 
              }    
               </button>
+               {
+                errors.password?.type==='minLength' && <p className="text-red-500">Password must be at least 6 characters long.</p>
+              }
           </div>
 
           {/* Submit Button */}

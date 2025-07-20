@@ -1,38 +1,53 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import UseAuth from '../../../Hooks/UseAuth';
 import Swal from 'sweetalert2';
 import toast from 'react-hot-toast';
+import axios from 'axios';
 
 const SignUp = () => {
-    const {register,handleSubmit,formState: {errors}} = useForm();
-    const { createUser} = UseAuth();
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { createUser } = UseAuth();
+  const [showPassword, setShowPassword] = useState(false);
+   const navigate = useNavigate();
 
+  const onSubmit = (data) => {
+    createUser(data.email, data.password, data.name, data.photoURL)
+      .then((result) => {
+        const user = result.user;
 
-     const [showPassword,setShowPassword] = useState(false)
+        // Backend এ User Data Save
+        const newUser = {
+          name: data.name,
+          email: data.email,
+          photoURL: data.photoURL,
+          role: "member", // default role
+          createdAt: new Date(),
+        };
 
-    const onSubmit = data =>{
-        createUser(data.email, data.password, data.name, data.photoURL)
-        // console.log(data)
-        .then(result => {
-          const user = result.user;
-           Swal.fire({
-              position: "top-bottom",
-              icon: "success",
-              title: "Sign Up successful!",
-              showConfirmButton: false,
-              timer: 1500
-               });
-        })
-        .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-           toast.error(`Registration failed: ${errorMessage}`);
-    // ..
-  });
-    }   
+        axios.post("http://localhost:5000/users", newUser)
+          .then((res) => {
+            if (res.data.insertedId) {
+              Swal.fire({
+                position: "top-bottom",
+                icon: "success",
+                title: "Sign Up successful!",
+                showConfirmButton: false,
+                timer: 1500
+              });
+               navigate("/")
+            }
+          })
+          .catch(() => {
+            toast.error("Failed to save user info to database!");
+          });
+      })
+      .catch((error) => {
+        toast.error(`Registration failed: ${error.message}`);
+      });
+  };
 
   return (
     <div className="flex items-center justify-center bg-gray-100 px-4 py-6">
@@ -86,33 +101,35 @@ const SignUp = () => {
           </div>
 
           {/* Password */}
-          <div className='relative'>
+          <div className="relative">
             <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
               Password
             </label>
             <input
-              name='password' 
+              name="password"
               type={showPassword ? 'text' : 'password'}
-              {...register('password',{minLength:6})}
+              {...register('password', { minLength: 6 })}
               placeholder="******"
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
-             <button onClick={()=>{setShowPassword(!showPassword)}} className='absolute cursor-pointer bg-gray-200 px-2 py-1 rounded-md mt-2 items-center right-6'> 
-             {
-                showPassword ? <FaEyeSlash /> : <FaEye /> 
-             }    
-              </button>
-               {
-                errors.password?.type==='minLength' && <p className="text-red-500">Password must be at least 6 characters long.</p>
-              }
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute cursor-pointer bg-gray-200 px-2 py-1 rounded-md mt-2 items-center right-6"
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
+            {errors.password?.type === 'minLength' && (
+              <p className="text-red-500">Password must be at least 6 characters long.</p>
+            )}
           </div>
 
           {/* Submit Button */}
           <div>
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-700 transition duration-300"
+              className="w-full bg-blue-600 text-white cursor-pointer font-semibold py-2 rounded-md hover:bg-blue-700 transition duration-300"
             >
               Sign Up
             </button>

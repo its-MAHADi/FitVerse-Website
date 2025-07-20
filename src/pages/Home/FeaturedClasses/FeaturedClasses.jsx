@@ -57,7 +57,7 @@ const FeaturedClasses = () => {
               {/* Card Content */}
               <div className="p-5 text-left">
                 <h3 className="text-xl font-bold text-gray-800 mb-2">
-                  {cls.title}
+                  {cls.name}
                 </h3>
                 <p className="text-gray-600 text-sm mb-4">{cls.description}</p>
 

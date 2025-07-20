@@ -28,8 +28,8 @@ const Login = () => {
               showConfirmButton: false,
               timer: 1500
                });
+                navigate(`${locaion.state?locaion.state : "/" }`)
         })
-         navigate(`${locaion.state?locaion.state : "/" }`)
         .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;

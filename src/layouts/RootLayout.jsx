@@ -7,7 +7,7 @@ const RootLayout = () => {
   return (
     <div className='max-w-7xl mx-auto'>
       <StickyNavbar></StickyNavbar>
-     <div className='min-h-[calc(100vh-461px)] mx-auto'>
+     <div className='min-h-[calc(100vh-471px)] mx-auto'>
        <Outlet></Outlet>
      </div>
       <Footer></Footer>

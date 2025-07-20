@@ -3,9 +3,11 @@ import React from 'react'
 import UseAuth from '../../../Hooks/UseAuth'
 import Swal from 'sweetalert2';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router';
 
 const SocialLogin = () => {
     const {signInWithGoogle} = UseAuth();
+    const navigate = useNavigate();
     const handleGoogleSignIn = () => {
       signInWithGoogle()
         .then(result =>{
@@ -16,7 +18,9 @@ const SocialLogin = () => {
             icon: "success",
             draggable: true
           });
+            navigate("/")
       })
+         
        .catch(error =>{
          const errorCode = error.code;
          const errorMessage = error.message;

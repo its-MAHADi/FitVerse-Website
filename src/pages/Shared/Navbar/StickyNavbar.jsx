@@ -29,7 +29,7 @@ const StickyNavbar = () => {
           <NavLink  className={({isActive})=>(isActive? "bg-blue-600 px-2 py-1 rounded-md text-white" : "")} to="/all-trainers">All Trainers</NavLink>
           <NavLink  className={({isActive})=>(isActive? "bg-blue-600 px-2 py-1 rounded-md text-white" : "")} to="/all-classes">All Classes</NavLink>
           <NavLink  className={({isActive})=>(isActive? "bg-blue-600 px-2 py-1 rounded-md text-white" : "")} to="/community">Community</NavLink>
-          <NavLink  className={({isActive})=>(isActive? "bg-blue-600 px-2 py-1 rounded-md text-white" : "")} to="/dashboard"> Dashboard</NavLink>
+          {/* <NavLink  className={({isActive})=>(isActive? "bg-blue-600 px-2 py-1 rounded-md text-white" : "")} to="/"> Dashboard</NavLink> */}
     </ul>
   );
   return (
@@ -58,31 +58,64 @@ const StickyNavbar = () => {
               Log In
             </Button>
           </Link> */}
+          
+         {user?.photoURL && (
+        <img
+          className="w-12 h-12 rounded-full border-blue-500 border-2"
+          src={user.photoURL}
+          alt="User Profile"
+        />
+      )}
 
-
+      
          {
          user? <Button onClick={handleLogOut}  variant="text" size="sm" className="bg-red-500 text-white rounded-md cursor-pointer" >Logout </Button> :  <Link to="login" className=" bg-gray-300 rounded-md"><Button className="cursor-pointer " fullWidth variant="text" size="sm">Log In </Button></Link>
          }
 
 
-          <Link to="/signup">
+          {
+          user?  <Link to="/signup">
+            <Button className="text-black border-1 px-4 py-2 rounded-md hover:bg-green-600 hover:text-white cursor-pointer hidden" variant="gradient" size="lg">
+              Sign Up
+            </Button>
+          </Link> :   <Link to="/signup">
             <Button className="text-black border-1 px-4 py-2 rounded-md hover:bg-green-600 hover:text-white cursor-pointer" variant="gradient" size="lg">
               Sign Up
             </Button>
           </Link>
+          }
+
+         
+          {/* <Link to="/signup">
+            <Button className="text-black border-1 px-4 py-2 rounded-md hover:bg-green-600 hover:text-white cursor-pointer" variant="gradient" size="lg">
+              Sign Up
+            </Button>
+          </Link> */}
         </div>
 
+
         {/* Mobile menu icon */}
-        <IconButton
+
+        <div className="lg:hidden flex items-center gap-3">
+
+           {user?.photoURL && (
+    <img
+      className="w-10 h-10 rounded-full border-2 border-blue-500 object-cover"
+      src={user.photoURL}
+      alt="User Profile"
+    />
+  )}
+
+           <IconButton
           variant="text"
-          className="ml-auto h-6 w-6 text-inherit lg:hidden"
+          className="h-10 w-10 text-inherit flex items-center justify-center"
           ripple={false}
           onClick={() => setOpenNav(!openNav)}
         >
           {openNav ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
+              className="h-7 w-7"
               fill="none"
               stroke="currentColor"
               strokeWidth={2}
@@ -93,7 +126,7 @@ const StickyNavbar = () => {
           ) : (
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
+              className="h-7 w-7"
               fill="none"
               stroke="currentColor"
               strokeWidth={2}
@@ -103,6 +136,7 @@ const StickyNavbar = () => {
             </svg>
           )}
         </IconButton>
+        </div>
       </div>
 
       {/* Mobile nav */}
@@ -122,7 +156,7 @@ const StickyNavbar = () => {
         user? <Button onClick={handleLogOut} fullWidth variant="text" size="sm" className="bg-red-500 text-white rounded-md" >Logout </Button> :  <Link to="login" className="w-full bg-gray-300 rounded-md "><Button fullWidth variant="text" size="sm">Log In </Button></Link>
          }
 
-          <Link to="/register" className="w-full bg-green-600 rounded-md">
+          <Link to="/signup" className="w-full bg-green-600 rounded-md">
             <Button fullWidth variant="gradient" size="sm">
               Sign Up
             </Button>

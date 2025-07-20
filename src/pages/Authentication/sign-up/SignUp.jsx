@@ -14,7 +14,8 @@ const SignUp = () => {
      const [showPassword,setShowPassword] = useState(false)
 
     const onSubmit = data =>{
-        createUser(data.email,data.password)
+        createUser(data.email, data.password, data.name, data.photoURL)
+        // console.log(data)
         .then(result => {
           const user = result.user;
            Swal.fire({

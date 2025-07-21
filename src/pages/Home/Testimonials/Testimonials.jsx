@@ -32,10 +32,10 @@ const Testimonials = () => {
       <h2 className="text-3xl font-bold text-center text-blue-600 mb-2">
        <span className="text-black"> Testimonial</span> Section
       </h2>
-      <div className="hidden lg:block">
+      <div className=" max-w-6xl mx-auto hidden lg:block">
         {/* Desktop View: 3 Cards per Slide */}
         <Carousel
-          autoPlay
+          autoPlay={true}
           infiniteLoop
           showThumbs={false}
           showStatus={false}
@@ -46,7 +46,7 @@ const Testimonials = () => {
               <button
                 type="button"
                 onClick={onClickHandler}
-                className="absolute left-4 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-800 text-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg z-10"
+                className="absolute left-6 top-4/7 -translate-y-1/2 bg-blue-600 hover:bg-blue-800 text-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg z-10"
               >
                 &#10094;
               </button>
@@ -57,7 +57,7 @@ const Testimonials = () => {
               <button
                 type="button"
                 onClick={onClickHandler}
-                className="absolute right-4 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-800 text-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg z-10"
+                className="absolute right-6 top-4/7 -translate-y-1/2 bg-blue-600 hover:bg-blue-800 text-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg z-10"
               >
                 &#10095;
               </button>
@@ -82,7 +82,7 @@ const Testimonials = () => {
                   <img
                     src={review.photo}
                     alt={review.name}
-                    className="w-0 h-75 rounded-full mx-auto border-4 border-blue-500 mb-4 object-cover"
+                    className="w-0 h-70 rounded-full mx-auto border-4 border-blue-500 mb-4 object-cover"
                   />
                   <h3 className="text-lg font-semibold">{review.name}</h3>
                   <p className="text-gray-600 text-sm mt-2 italic">

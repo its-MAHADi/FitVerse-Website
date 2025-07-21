@@ -3,8 +3,11 @@ import aboutImage from "../../../assets/fitness gym.jpg";
 
 const AboutSection = () => {
   return (
-    <section className="py-16 bg-white">
-      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+    <section className="">
+        <h2 className="text-3xl text-center md:text-4xl font-bold text-gray-800">
+            About <span className="text-blue-600">FitVerse</span>
+          </h2>
+      <div className="container mx-auto py-8 px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         {/* Image Section */}
         <div className="flex justify-center">
           <img
@@ -16,9 +19,6 @@ const AboutSection = () => {
 
         {/* Text Section */}
         <div className="space-y-6 text-center md:text-left">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
-            About <span className="text-blue-600">FitVerse</span>
-          </h2>
           <p className="text-gray-600 text-lg leading-relaxed">
             FitVerse is a next-generation fitness tracking platform built to 
             help you achieve your health and fitness goals. We combine cutting-edge 

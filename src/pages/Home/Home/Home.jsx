@@ -6,6 +6,7 @@ import FeaturedClasses from '../FeaturedClasses/FeaturedClasses'
 import Testimonials from '../Testimonials/Testimonials'
 import LatestCommunity from '../Community/LatestCommunity'
 import Newsletter from '../Newsletter/Newsletter'
+import TeamSection from '../TeamSection/TeamSection'
 
 const Home = () => {
   return (
@@ -17,6 +18,7 @@ const Home = () => {
      <Testimonials></Testimonials>
      <LatestCommunity></LatestCommunity>
      <Newsletter></Newsletter>
+     <TeamSection></TeamSection>
     </div>
   )
 }

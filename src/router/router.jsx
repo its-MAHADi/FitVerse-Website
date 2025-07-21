@@ -35,7 +35,7 @@ export const router = createBrowserRouter([
   },
      { 
         path:"/community/:id",
-        Component:<CommunityDetails></CommunityDetails>,
+        Component:CommunityDetails,
      },
   {
     path:"/",

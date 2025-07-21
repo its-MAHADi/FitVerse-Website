@@ -71,7 +71,7 @@ const LatestCommunity = () => {
                     <>
                       {post.description.slice(0, 70)}...
                       <Link
-                        to={`/forum/${post._id}`}
+                        to={`/community/${post._id}`}
                         className="text-blue-600 font-medium hover:underline ml-1"
                       >
                         Read More

@@ -69,7 +69,7 @@ const StickyNavbar = () => {
 
       
          {
-         user? <Button onClick={handleLogOut}  variant="text" size="sm" className="bg-red-500 text-white rounded-md cursor-pointer" >Logout </Button> :  <Link to="login" className=" bg-gray-300 rounded-md"><Button className="cursor-pointer " fullWidth variant="text" size="sm">Log In </Button></Link>
+         user? <Button onClick={handleLogOut}  variant="text" size="sm" className="bg-red-500 text-white rounded-md cursor-pointer" >Logout </Button> :  <Link to="login" className=" bg-gray-300 rounded-md"><Button className="cursor-pointer text-[14px] " variant="text" size="sm">Log In </Button></Link>
          }
 
 

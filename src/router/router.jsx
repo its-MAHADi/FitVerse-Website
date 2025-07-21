@@ -7,6 +7,7 @@ import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/Authentication/Login/Login";
 import SignUp from "../pages/Authentication/sign-up/SignUp";
 import Home from "../pages/Home/Home/Home";
+import CommunityDetails from "../pages/community Details/CommunityDetails";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
        
     ]
   },
+     { 
+        path:"/community/:id",
+        Component:<CommunityDetails></CommunityDetails>,
+     },
   {
     path:"/",
     Component:AuthLayout,

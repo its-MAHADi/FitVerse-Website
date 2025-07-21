@@ -82,7 +82,7 @@ const Testimonials = () => {
                   <img
                     src={review.photo}
                     alt={review.name}
-                    className="w-60 h-60 rounded-4xl mx-auto border-4 border-blue-500 mb-4 object-cover"
+                    className="w-0 h-75 rounded-full mx-auto border-4 border-blue-500 mb-4 object-cover"
                   />
                   <h3 className="text-lg font-semibold">{review.name}</h3>
                   <p className="text-gray-600 text-sm mt-2 italic">

@@ -11,6 +11,7 @@ import CommunityDetails from "../pages/community Details/CommunityDetails";
 import TrainerDetails from "../pages/Trainers Details/TrainerDetails";
 import TrainerBooked from "../pages/TrainerBooked/TrainerBooked";
 import BecomeTrainer from "../pages/BecomeTrainer/BecomeTrainer";
+import PaymentPage from "../pages/PaymentPage/PaymentPage";
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ export const router = createBrowserRouter([
      { 
         path:"/become-trainer",
         Component:BecomeTrainer,
+     },
+     { 
+        path:"/create-payment-intent",
+        Component:PaymentPage,
      },
   {
     path:"/",

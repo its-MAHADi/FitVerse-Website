@@ -45,7 +45,7 @@ const TrainerDetails = () => {
       confirmButtonText: "Yes, Book Now",
     }).then((result) => {
       if (result.isConfirmed) {
-        navigate(`/trainer-booked/${trainer._id}?slot=${encodeURIComponent(slot)}`);
+        navigate(`/trainer-booked/${trainer._id}?slot=${encodeURIComponent(slot)}&trainer=${encodeURIComponent(trainer.name)}`);
       }
     });
   };

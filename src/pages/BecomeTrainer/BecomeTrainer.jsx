@@ -1,31 +1,88 @@
-import React from "react";
-import { useForm } from "react-hook-form";
+import React, { useState, useContext } from "react";
+import Select from "react-select";
 import Swal from "sweetalert2";
 import axios from "axios";
 import StickyNavbar from "../Shared/Navbar/StickyNavbar";
+import UseAuth from "../../Hooks/UseAuth";  // AuthContext থেকে ইউজার ইমেইল নিচ্ছি
+
 
 const BecomeTrainer = () => {
-  const { register, handleSubmit, reset } = useForm();
+  const { user } = UseAuth()
 
-  const onSubmit = async (data) => {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: user?.email || "",
+    age: "",
+    image: "",
+    skills: [],
+    availableDays: [],
+    availableTime: "",
+    otherInfo: "",
+  });
+
+  const daysOptions = [
+    { value: "Sun", label: "Sunday" },
+    { value: "Mon", label: "Monday" },
+    { value: "Tue", label: "Tuesday" },
+    { value: "Wed", label: "Wednesday" },
+    { value: "Thu", label: "Thursday" },
+    { value: "Fri", label: "Friday" },
+    { value: "Sat", label: "Saturday" },
+  ];
+
+  const skillsList = [
+    "Yoga",
+    "Zumba",
+    "Strength Training",
+    "Cardio",
+    "Pilates",
+  ];
+
+  const handleSkillChange = (skill) => {
+    setFormData((prev) => {
+      const updatedSkills = prev.skills.includes(skill)
+        ? prev.skills.filter((s) => s !== skill)
+        : [...prev.skills, skill];
+      return { ...prev, skills: updatedSkills };
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const trainerData = {
+      ...formData,
+      status: "pending", // ডিফল্ট status
+    };
+
     try {
-      // Post request to backend
-      const res = await axios.post("http://localhost:5000/become-trainer", data);
-      if (res.status === 200) {
+      const res = await axios.post(
+        "http://localhost:5000/become-trainer",
+        trainerData
+      );
+      if (res.data.insertedId) {
         Swal.fire({
-          title: "Success!",
-          text: "Your application has been submitted successfully.",
           icon: "success",
+          title: "Application Submitted",
+          text: "Your trainer application is under review.",
           confirmButtonColor: "#2563eb",
         });
-        reset();
+        setFormData({
+          fullName: "",
+          email: user?.email || "",
+          age: "",
+          image: "",
+          skills: [],
+          availableDays: [],
+          availableTime: "",
+          otherInfo: "",
+        });
       }
-    } catch (error) {
+    } catch (err) {
       Swal.fire({
-        title: "Error!",
-        text: "Something went wrong. Please try again.",
         icon: "error",
-        confirmButtonColor: "#d33",
+        title: "Error",
+        text: err.message || "Something went wrong!",
       });
     }
   };
@@ -33,134 +90,142 @@ const BecomeTrainer = () => {
   return (
     <div>
       <StickyNavbar />
-      <div className="max-w-5xl mx-auto px-4 py-10">
-        <h1 className="text-4xl font-bold text-center text-blue-600 mb-6">
-          Become a Trainer
-        </h1>
-        <p className="text-gray-600 text-center max-w-2xl mx-auto mb-10">
-          Share your expertise and inspire others to achieve their fitness goals.
-          Fill out the form below to apply as a trainer in our platform.
-        </p>
-
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="bg-white shadow-lg rounded-lg p-8 space-y-6"
-        >
-          {/* Name */}
+      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-md my-10 px-3">
+        <h2 className="text-3xl font-bold text-blue-600 text-center mb-6">
+          Apply to Become a Trainer
+        </h2>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Full Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-gray-700 font-medium mb-1">
               Full Name
             </label>
             <input
               type="text"
-              {...register("name", { required: true })}
-              placeholder="Enter your full name"
-              className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              value={formData.fullName}
+              onChange={(e) =>
+                setFormData({ ...formData, fullName: e.target.value })
+              }
+              className="w-full border p-3 rounded-md"
               required
             />
           </div>
 
           {/* Email */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Email
-            </label>
+            <label className="block text-gray-700 font-medium mb-1">Email</label>
             <input
               type="email"
-              {...register("email", { required: true })}
-              placeholder="example@gmail.com"
-              className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              required
+              value={formData.email}
+              readOnly
+              className="w-full border p-3 rounded-md bg-gray-100"
             />
           </div>
 
           {/* Age */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Age
-            </label>
+            <label className="block text-gray-700 font-medium mb-1">Age</label>
             <input
               type="number"
-              {...register("age", { required: true })}
-              placeholder="Enter your age"
-              className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              value={formData.age}
+              onChange={(e) =>
+                setFormData({ ...formData, age: e.target.value })
+              }
+              className="w-full border p-3 rounded-md"
               required
             />
           </div>
 
-          {/* Experience */}
+          {/* Profile Image */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Years of Experience
+            <label className="block text-gray-700 font-medium mb-1">
+              Profile Image URL
             </label>
             <input
-              type="number"
-              {...register("experience", { required: true })}
-              placeholder="e.g., 5"
-              className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              type="url"
+              value={formData.image}
+              onChange={(e) =>
+                setFormData({ ...formData, image: e.target.value })
+              }
+              className="w-full border p-3 rounded-md"
               required
             />
           </div>
 
-          {/* Expertise */}
+          {/* Skills */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Area of Expertise
+            <label className="block text-gray-700 font-medium mb-1">
+              Skills
+            </label>
+            <div className="flex flex-wrap gap-3">
+              {skillsList.map((skill) => (
+                <label key={skill} className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={formData.skills.includes(skill)}
+                    onChange={() => handleSkillChange(skill)}
+                  />
+                  {skill}
+                </label>
+              ))}
+            </div>
+          </div>
+
+          {/* Available Days */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-1">
+              Available Days
+            </label>
+            <Select
+              options={daysOptions}
+              isMulti
+              value={formData.availableDays}
+              onChange={(selected) =>
+                setFormData({ ...formData, availableDays: selected })
+              }
+              className="w-full"
+            />
+          </div>
+
+          {/* Available Time */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-1">
+              Available Time
             </label>
             <input
               type="text"
-              {...register("expertise", { required: true })}
-              placeholder="e.g., Yoga, Strength Training"
-              className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              placeholder="e.g., 10 AM - 5 PM"
+              value={formData.availableTime}
+              onChange={(e) =>
+                setFormData({ ...formData, availableTime: e.target.value })
+              }
+              className="w-full border p-3 rounded-md"
               required
             />
           </div>
 
-          {/* Bio */}
+          {/* Other Info */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Short Bio
+            <label className="block text-gray-700 font-medium mb-1">
+              Other Info
             </label>
             <textarea
-              {...register("bio")}
-              placeholder="Write a short introduction about yourself..."
+              value={formData.otherInfo}
+              onChange={(e) =>
+                setFormData({ ...formData, otherInfo: e.target.value })
+              }
+              className="w-full border p-3 rounded-md"
               rows="4"
-              className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-            ></textarea>
-          </div>
-
-          {/* Social Links */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Social Links (Optional)
-            </label>
-            <input
-              type="text"
-              {...register("facebook")}
-              placeholder="Facebook profile link"
-              className="w-full px-4 py-2 border rounded-md mb-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-            />
-            <input
-              type="text"
-              {...register("linkedin")}
-              placeholder="LinkedIn profile link"
-              className="w-full px-4 py-2 border rounded-md mb-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-            />
-            <input
-              type="text"
-              {...register("instagram")}
-              placeholder="Instagram profile link"
-              className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
             />
           </div>
 
           {/* Submit */}
-          <div>
+          <div className="text-center py-3">
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+              className="px-6 py-3 cursor-pointer bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-800 transition"
             >
-              Submit Application
+              Apply
             </button>
           </div>
         </form>

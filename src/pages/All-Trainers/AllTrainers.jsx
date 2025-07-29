@@ -5,7 +5,7 @@ import { FaClock, FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa"
 import { Link } from "react-router";
 
 const fetchTrainers = async () => {
-  const { data } = await axios.get("http://localhost:5000/trainers");
+  const { data } = await axios.get("https://fit-verse-server-nine.vercel.app/trainers");
   return data;
 };
 

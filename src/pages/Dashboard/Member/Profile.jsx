@@ -24,7 +24,7 @@ const Profile = () => {
 
       // 2. MongoDB Profile Update
       const res = await axios.patch(
-        `http://localhost:5000/users/${user.email}`,
+        `https://fit-verse-server-nine.vercel.app/users/${user.email}`,
         { name, photoURL }
       );
       console.log("Mongo Update:", res.data);

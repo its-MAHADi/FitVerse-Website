@@ -4,7 +4,7 @@ import axios from "axios";
 import { FaStar, FaBox } from "react-icons/fa";
 
 const fetchFeaturedClasses = async () => {
-  const { data } = await axios.get("http://localhost:5000/featured-classes");
+  const { data } = await axios.get("https://fit-verse-server-nine.vercel.app/featured-classes");
   return data;
 };
 

@@ -9,7 +9,7 @@ const AllTrainersDashboard = () => {
   // Fetch all trainers
   const fetchTrainers = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/trainers");
+      const res = await axios.get("https://fit-verse-server-nine.vercel.app/trainers");
       setTrainers(res.data);
     } catch (err) {
       console.error("Error fetching trainers:", err);
@@ -36,7 +36,7 @@ const AllTrainersDashboard = () => {
     if (!confirm.isConfirmed) return;
 
     try {
-      await axios.patch(`http://localhost:5000/users/${email}/role`, {
+      await axios.patch(`https://fit-verse-server-nine.vercel.app/users/${email}/role`, {
         role: "member",
       });
       setTrainers((prev) => prev.filter((t) => t.email !== email));

@@ -13,7 +13,7 @@ const Newsletter = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/newsletter", formData);
+      await axios.post("https://fit-verse-server-nine.vercel.app/newsletter", formData);
       toast.success("Thank you for subscribing!");
       setFormData({ name: "", email: "" });
     } catch (error) {

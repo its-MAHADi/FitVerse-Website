@@ -10,7 +10,7 @@ const AppliedTrainers = () => {
   // Fetch applied trainers
   const fetchApplications = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/become-trainer");
+      const res = await axios.get("https://fit-verse-server-nine.vercel.app/become-trainer");
       setApplications(res.data);
     } catch (error) {
       console.error("Error fetching trainer applications:", error);

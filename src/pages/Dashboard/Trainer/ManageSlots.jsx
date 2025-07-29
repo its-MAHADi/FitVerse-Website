@@ -8,7 +8,7 @@ const ManageSlots = () => {
   const [slots, setSlots] = useState([]);
 
   const fetchSlots = () => {
-    axios.get(`http://localhost:5000/trainer/slots/${user.email}`).then((res) => {
+    axios.get(`https://fit-verse-server-nine.vercel.app/trainer/slots/${user.email}`).then((res) => {
       setSlots(res.data);
     });
   };
@@ -28,7 +28,7 @@ const ManageSlots = () => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await axios.delete(`http://localhost:5000/trainer/slots/${id}`);
+        await axios.delete(`https://fit-verse-server-nine.vercel.app/trainer/slots/${id}`);
         fetchSlots();
         Swal.fire("Deleted!", "Slot has been deleted.", "success");
       }

@@ -43,7 +43,7 @@ const AddClass = () => {
         createdAt: new Date(),
       };
 
-      const res = await axios.post("http://localhost:5000/add-class", classData);
+      const res = await axios.post("https://fit-verse-server-nine.vercel.app/add-class", classData);
 
       if (res.data.success) {
         Swal.fire({

@@ -8,7 +8,7 @@ import { MdDateRange } from "react-icons/md";
 import StickyNavbar from "../Shared/Navbar/StickyNavbar";
 
 const fetchTrainerDetails = async (id) => {
-  const { data } = await axios.get(`http://localhost:5000/trainers/${id}`);
+  const { data } = await axios.get(`https://fit-verse-server-nine.vercel.app/trainers/${id}`);
   return data;
 };
 

@@ -13,7 +13,7 @@ const Community = () => {
   const fetchPosts = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/community?page=${currentPage}&limit=${limit}`
+        `https://fit-verse-server-nine.vercel.app/community?page=${currentPage}&limit=${limit}`
       );
       setPosts(res.data.posts);
       setTotalPages(res.data.totalPages);
@@ -33,7 +33,7 @@ const Community = () => {
     }
     try {
       const res = await axios.put(
-        `http://localhost:5000/community/${postId}/vote`,
+        `https://fit-verse-server-nine.vercel.app/community/${postId}/vote`,
         { userEmail: user.email, voteType: type }
       );
 

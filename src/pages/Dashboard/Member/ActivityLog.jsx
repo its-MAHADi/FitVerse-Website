@@ -11,7 +11,7 @@ const ActivityLog = () => {
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(`http://localhost:5000/become-trainer/${user.email}`)
+        .get(`https://fit-verse-server-nine.vercel.app/become-trainer/${user.email}`)
         .then((res) => setApplications(res.data))
         .catch((err) => console.error(err));
     }

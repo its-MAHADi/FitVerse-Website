@@ -10,14 +10,14 @@ const TrainerApplicationDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/become-trainer/${id}`)
+      .get(`https://fit-verse-server-nine.vercel.app/become-trainer/${id}`)
       .then((res) => setApplication(res.data))
       .catch((err) => console.error(err));
   }, [id]);
 
   const approveTrainer = async () => {
     try {
-      await axios.patch(`http://localhost:5000/become-trainer/${id}/approve`);
+      await axios.patch(`https://fit-verse-server-nine.vercel.app/become-trainer/${id}/approve`);
       Swal.fire("Approved!", "Trainer application has been approved.", "success");
       navigate("/dashboard/admin/applied-trainer");
     } catch (err) {
@@ -38,7 +38,7 @@ const TrainerApplicationDetails = () => {
     if (!message) return;
 
     try {
-      await axios.patch(`http://localhost:5000/become-trainer/${id}/reject`, { message });
+      await axios.patch(`https://fit-verse-server-nine.vercel.app/become-trainer/${id}/reject`, { message });
       Swal.fire("Rejected!", "Trainer application has been rejected.", "info");
       navigate("/dashboard/admin/applied-trainer");
     } catch (err) {

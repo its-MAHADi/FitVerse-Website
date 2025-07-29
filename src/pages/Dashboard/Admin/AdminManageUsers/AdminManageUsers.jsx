@@ -14,7 +14,7 @@ const AdminManageUsers = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/admin/users");
+        const res = await axios.get("https://fit-verse-server-nine.vercel.app/admin/users");
         setUsers(res.data);
         setFilteredUsers(res.data);
       } catch (err) {
@@ -40,7 +40,7 @@ const AdminManageUsers = () => {
 
   const makeAdmin = async (email) => {
   try {
-    await axios.patch(`http://localhost:5000/admin/users/${email}/make-admin`);
+    await axios.patch(`https://fit-verse-server-nine.vercel.app/admin/users/${email}/make-admin`);
     setUsers((prev) =>
       prev.map((u) => (u.email === email ? { ...u, role: "admin" } : u))
     );
@@ -63,7 +63,7 @@ const AdminManageUsers = () => {
 
  const removeAdmin = async (email) => {
     try {
-      const res = await axios.patch(`http://localhost:5000/admin/users/${email}/remove-admin`);
+      const res = await axios.patch(`https://fit-verse-server-nine.vercel.app/admin/users/${email}/remove-admin`);
       if (res.data.success) {
         setUsers((prev) =>
           prev.map((u) => (u.email === email ? { ...u, role: "member" } : u))

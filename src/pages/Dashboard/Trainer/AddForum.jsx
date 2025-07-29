@@ -19,7 +19,7 @@ const AddForum = () => {
         author: user.displayName || user.email,
         role: user.role, // "trainer" or "admin"
       };
-      await axios.post("http://localhost:5000/forums", payload);
+      await axios.post("https://fit-verse-server-nine.vercel.app/forums", payload);
       Swal.fire("Success", "Forum added successfully!", "success");
       setTitle("");
       setContent("");

@@ -27,7 +27,7 @@ const SignUp = () => {
           createdAt: new Date(),
         };
 
-        axios.post("http://localhost:5000/users", newUser)
+        axios.post("https://fit-verse-server-nine.vercel.app/users", newUser)
           .then((res) => {
             if (res.data.insertedId) {
               Swal.fire({

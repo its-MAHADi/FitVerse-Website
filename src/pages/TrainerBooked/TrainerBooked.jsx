@@ -53,7 +53,7 @@ const TrainerBooked = () => {
   useEffect(() => {
     if (trainerId) {
       axios
-        .get(`http://localhost:5000/trainers/${trainerId}`)
+        .get(`https://fit-verse-server-nine.vercel.app/trainers/${trainerId}`)
         .then((res) => setTrainerDetails(res.data))
         .catch((err) => console.error("Error fetching trainer details:", err));
     }
@@ -90,7 +90,7 @@ const TrainerBooked = () => {
 
     try {
       // বুকিং ডেটা DB তে add করবো
-      await axios.post("http://localhost:5000/booked-trainers", bookingData);
+      await axios.post("https://fit-verse-server-nine.vercel.app/booked-trainers", bookingData);
 
       // তারপর আগের মতো পেমেন্ট পেজে যাবে
       Swal.fire({

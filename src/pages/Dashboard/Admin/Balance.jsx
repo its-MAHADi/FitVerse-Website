@@ -14,12 +14,12 @@ const Balance = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const balanceRes = await axios.get("http://localhost:5000/admin/balance");
+      const balanceRes = await axios.get("https://fit-verse-server-nine.vercel.app/admin/balance");
       setTransactions(balanceRes.data.lastSixTransactions || []);
       setTotalBalance(Number(balanceRes.data.totalBalance || 0));
       setPaidMembers(balanceRes.data.paidMembers || 0);
 
-      const statsRes = await axios.get("http://localhost:5000/admin/stats");
+      const statsRes = await axios.get("https://fit-verse-server-nine.vercel.app/admin/stats");
       setNewsletterSubscribers(statsRes.data.newsletterSubscribers || 0);
     };
     fetchData();

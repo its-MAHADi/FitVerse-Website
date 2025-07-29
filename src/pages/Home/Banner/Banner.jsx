@@ -7,7 +7,7 @@ import { Link } from "react-router";
 
 // TanStack Query দিয়ে ডেটা ফেচ
 const fetchClasses = async () => {
-  const { data } = await axios.get("http://localhost:5000/classes");
+  const { data } = await axios.get("https://fit-verse-server-nine.vercel.app/classes");
   return data;
 };
 

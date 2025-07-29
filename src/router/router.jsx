@@ -1,4 +1,4 @@
-import {createBrowserRouter} from "react-router";
+import { createBrowserRouter } from "react-router";
 import RootLayout from "../layouts/RootLayout";
 import AllTrainers from "../pages/All-Trainers/AllTrainers";
 import AllClasses from "../pages/All-Classes/AllClasses";
@@ -29,157 +29,221 @@ import AddCommunity from "../pages/Dashboard/Admin/AddCommunity";
 import AdminManageUsers from "../pages/Dashboard/Admin/AdminManageUsers/AdminManageUsers";
 import AdminUserDetails from "../pages/Dashboard/Admin/AdminManageUsers/AdminUserDetails";
 import TrainerApplicationDetails from "../pages/Dashboard/Admin/TrainerApplicationDetails";
+import PrivetRoutes from "../routes/PrivetRoutes";
+
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    Component:RootLayout,
-    children:[
-        {
-            index:true,
-            Component:Home,
-        },
-        {
-            path:"/all-trainers",
-            Component:AllTrainers,
-        },
-        {
-            path:"/all-classes",
-            Component:AllClasses,
-        },
-         {
-            path:"/community",
-            Component:Community,
-        },
-       
-    ]
-  },
-     { 
-        path:"/community/:id",
-        Component:CommunityDetails,
-     },
-     { 
-        path:"/trainers/:id",
-        Component:TrainerDetails,
-     },
-     { 
-        path:"/trainer-booked/:id",
-        Component:TrainerBooked,
-     },
-     { 
-        path:"/become-trainer",
-        Component:BecomeTrainer,
-     },
-     { 
-        path:"/create-payment-intent",
-        Component:PaymentPage,
-     },
-  {
-    path:"/",
-    Component:AuthLayout,
-    errorElement:<p>error</p>,
-    children:[
+    Component: RootLayout,
+    children: [
       {
-        path:"login",
-        Component:Login,
+        index: true,
+        Component: Home,
       },
       {
-        path:"signup",
-        Component:SignUp,
-      }
-    ]
+        path: "/all-trainers",
+        Component: AllTrainers,
+      },
+      {
+        path: "/all-classes",
+        Component: AllClasses,
+      },
+      {
+        path: "/community",
+        Component: Community,
+      },
+    ],
   },
   {
-    path:"/dashboard",
-    element:<DashboardLayout></DashboardLayout>,
-    children:[
-        // ================= ADMIN ROUTES =================
+    path: "/community/:id",
+    Component: CommunityDetails,
+  },
+  {
+    path: "/trainers/:id",
+    Component: TrainerDetails,
+  },
+
+  // Trainer Booked Page (Private)
+  {
+    path: "/trainer-booked/:id",
+    element: (
+      <PrivetRoutes>
+        <TrainerBooked />
+      </PrivetRoutes>
+    ),
+  },
+
+  // Be a Trainer Page (Private)
+  {
+    path: "/become-trainer",
+    element: (
+      <PrivetRoutes>
+        <BecomeTrainer />
+      </PrivetRoutes>
+    ),
+  },
+
+  // Payment Page (Private)
+  {
+    path: "/create-payment-intent",
+    element: (
+      <PrivetRoutes>
+        <PaymentPage />
+      </PrivetRoutes>
+    ),
+  },
+
+  {
+    path: "/",
+    Component: AuthLayout,
+    errorElement: <p>error</p>,
+    children: [
       {
-        path:"admin/newsletter",
-         element: <AdminRoute>
-          <NewsletterSubscribers></NewsletterSubscribers>
-         </AdminRoute>
+        path: "login",
+        Component: Login,
       },
       {
-        path:"admin/all-trainers",
-         element: <AdminRoute>
-          <AllTrainersDashboard></AllTrainersDashboard>
-         </AdminRoute>
+        path: "signup",
+        Component: SignUp,
+      },
+    ],
+  },
+
+  // Dashboard (Private)
+  {
+    path: "/dashboard",
+    element: (
+      <PrivetRoutes>
+        <DashboardLayout />
+      </PrivetRoutes>
+    ),
+    children: [
+      // ================= ADMIN ROUTES =================
+      {
+        path: "admin/newsletter",
+        element: (
+          <AdminRoute>
+            <NewsletterSubscribers />
+          </AdminRoute>
+        ),
       },
       {
-        path:"admin/applied-trainer",
-         element: <AdminRoute>
-         <AppliedTrainers></AppliedTrainers>
-         </AdminRoute>
+        path: "admin/all-trainers",
+        element: (
+          <AdminRoute>
+            <AllTrainersDashboard />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "admin/applied-trainer",
+        element: (
+          <AdminRoute>
+            <AppliedTrainers />
+          </AdminRoute>
+        ),
       },
       {
         path: "admin/applied-trainer/:id",
-        element: <AdminRoute><TrainerApplicationDetails /></AdminRoute>,
-       },
-      {
-        path:"admin/balance",
-         element: <AdminRoute>
-         <Balance></Balance>
-         </AdminRoute>
+        element: (
+          <AdminRoute>
+            <TrainerApplicationDetails />
+          </AdminRoute>
+        ),
       },
       {
-        path:"admin/add-class",
-         element: <AdminRoute>
-         <AddClass></AddClass>
-         </AdminRoute>
+        path: "admin/balance",
+        element: (
+          <AdminRoute>
+            <Balance />
+          </AdminRoute>
+        ),
       },
       {
-        path:"admin/add-Community",
-         element: <AdminRoute>
-         <AddCommunity></AddCommunity>
-         </AdminRoute>
+        path: "admin/add-class",
+        element: (
+          <AdminRoute>
+            <AddClass />
+          </AdminRoute>
+        ),
       },
-        // ================== MANAGE USERS ==================
-    // ================== MANAGE USERS ==================
-    {
-  path: "admin/users",
-  element: (
-    <AdminRoute>
-      <AdminManageUsers />
-    </AdminRoute>
-  ),
-},
-{
-  path: "admin/users/:email",
-  element: (
-    <AdminRoute>
-      <AdminUserDetails />
-    </AdminRoute>
-  ),
-},
+      {
+        path: "admin/add-Community",
+        element: (
+          <AdminRoute>
+            <AddCommunity />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "admin/users",
+        element: (
+          <AdminRoute>
+            <AdminManageUsers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "admin/users/:email",
+        element: (
+          <AdminRoute>
+            <AdminUserDetails />
+          </AdminRoute>
+        ),
+      },
 
       // ================= TRAINER ROUTES =================
-    {
-      path: "trainer/manage-slots",
-      element: <TrainerRoute> <ManageSlots></ManageSlots> </TrainerRoute>,
-    },
-    {
-      path: "trainer/add-slot",
-      element: <TrainerRoute> <AddSlot></AddSlot> </TrainerRoute>,
-    },
-    {
-      path: "trainer/add-forum",
-      element: <TrainerRoute> <AddForum></AddForum> </TrainerRoute>,
-    },
+      {
+        path: "trainer/manage-slots",
+        element: (
+          <TrainerRoute>
+            <ManageSlots />
+          </TrainerRoute>
+        ),
+      },
+      {
+        path: "trainer/add-slot",
+        element: (
+          <TrainerRoute>
+            <AddSlot />
+          </TrainerRoute>
+        ),
+      },
+      {
+        path: "trainer/add-forum",
+        element: (
+          <TrainerRoute>
+            <AddForum />
+          </TrainerRoute>
+        ),
+      },
 
-    // ================= MEMBER ROUTES =================
-    {
-      path: "member/activity-log",
-      element: <MemberRoute> <ActivityLog></ActivityLog> </MemberRoute>,
-    },
-    {
-      path: "member/profile",
-      element: <MemberRoute> <Profile></Profile> </MemberRoute>,
-    },
-    {
-      path: "member/booked-trainer",
-      element: <MemberRoute> <BookedTrainer></BookedTrainer> </MemberRoute>,
-    },
-    ]
-  }
+      // ================= MEMBER ROUTES =================
+      {
+        path: "member/activity-log",
+        element: (
+          <MemberRoute>
+            <ActivityLog />
+          </MemberRoute>
+        ),
+      },
+      {
+        path: "member/profile",
+        element: (
+          <MemberRoute>
+            <Profile />
+          </MemberRoute>
+        ),
+      },
+      {
+        path: "member/booked-trainer",
+        element: (
+          <MemberRoute>
+            <BookedTrainer />
+          </MemberRoute>
+        ),
+      },
+    ],
+  },
 ]);

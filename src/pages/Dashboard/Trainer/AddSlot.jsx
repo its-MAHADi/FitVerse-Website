@@ -16,7 +16,7 @@ const AddSlot = () => {
   const [classes, setClasses] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/classes").then((res) => {
+    axios.get("https://fit-verse-server-nine.vercel.app/classes").then((res) => {
       setClasses(res.data);
     });
   }, []);
@@ -36,7 +36,7 @@ const AddSlot = () => {
           _id: user._id,
         },
       };
-      const res = await axios.post("http://localhost:5000/trainer/slots", payload);
+      const res = await axios.post("https://fit-verse-server-nine.vercel.app/trainer/slots", payload);
       if (res.data.success) {
         Swal.fire("Success", "Slot added successfully!", "success");
         setFormData({ slotName: "", slotTime: "", days: [], classId: "" });

@@ -16,7 +16,7 @@ const AllClasses = () => {
   const fetchClasses = () => {
     axios
       .get(
-        `http://localhost:5000/all-classes?page=${currentPage}&limit=${limit}&search=${search}`
+        `https://fit-verse-server-nine.vercel.app/all-classes?page=${currentPage}&limit=${limit}&search=${search}`
       )
       .then((res) => {
         setClasses(res.data.classes);
@@ -28,7 +28,7 @@ const AllClasses = () => {
   // Fetch Trainers
   const fetchTrainers = () => {
     axios
-      .get("http://localhost:5000/trainers")
+      .get("https://fit-verse-server-nine.vercel.app/trainers")
       .then((res) => setTrainers(res.data))
       .catch((err) => console.error("Error fetching trainers:", err));
   };

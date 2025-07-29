@@ -19,7 +19,7 @@ const CheckoutForm = ({ plan, slot, trainerName, trainerId, price }) => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:5000/create-payment-intent", {
+      .post("https://fit-verse-server-nine.vercel.app/create-payment-intent", {
         price: price.replace("$", ""),
         trainerName,
         slot,
@@ -53,7 +53,7 @@ const CheckoutForm = ({ plan, slot, trainerName, trainerId, price }) => {
 
       if (paymentIntent.status === "succeeded") {
         // 1. Save payment info
-        await axios.post("http://localhost:5000/save-payment", {
+        await axios.post("https://fit-verse-server-nine.vercel.app/save-payment", {
           trainerName,
           slot,
           plan,
@@ -63,7 +63,7 @@ const CheckoutForm = ({ plan, slot, trainerName, trainerId, price }) => {
         });
 
         // 2. Increase booking count
-        await axios.patch(`http://localhost:5000/trainers/${trainerId}/bookings`);
+        await axios.patch(`https://fit-verse-server-nine.vercel.app/trainers/${trainerId}/bookings`);
 
         Swal.fire({
           icon: "success",

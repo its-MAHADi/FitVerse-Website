@@ -6,7 +6,7 @@ import { FaCalendarAlt, FaUser, FaFlag, FaArrowLeft } from "react-icons/fa";
 import StickyNavbar from "../Shared/Navbar/StickyNavbar";
 
 const fetchPostDetails = async (id) => {
-  const { data } = await axios.get(`http://localhost:5000/communityPosts/${id}`);
+  const { data } = await axios.get(`https://fit-verse-server-nine.vercel.app/communityPosts/${id}`);
   return data;
 };
 

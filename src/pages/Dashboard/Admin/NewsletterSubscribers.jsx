@@ -6,7 +6,7 @@ const NewsletterSubscribers = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/newsletter")
+      .get("https://fit-verse-server-nine.vercel.app/newsletter")
       .then((res) => setSubscribers(res.data))
       .catch((err) => console.error(err));
   }, []);

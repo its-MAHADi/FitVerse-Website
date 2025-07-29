@@ -5,7 +5,7 @@ import { Link } from "react-router";
 import { FaCalendarAlt } from "react-icons/fa";
 
 const fetchCommunityPosts = async () => {
-  const { data } = await axios.get("http://localhost:5000/communityPosts");
+  const { data } = await axios.get("https://fit-verse-server-nine.vercel.app/communityPosts");
   return data || [];
 };
 

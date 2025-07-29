@@ -15,7 +15,7 @@ const BookedTrainer = () => {
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(`http://localhost:5000/booked-trainers/${user.email}`)
+        .get(`https://fit-verse-server-nine.vercel.app/booked-trainers/${user.email}`)
         .then((res) => {
           setBookedTrainer(res.data);
           setLoading(false);
@@ -29,7 +29,7 @@ const BookedTrainer = () => {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:5000/reviews", {
+      await axios.post("https://fit-verse-server-nine.vercel.app/reviews", {
         trainerId: selectedTrainer.trainerId,
         trainerName: selectedTrainer.trainerName,
         userEmail: user.email,

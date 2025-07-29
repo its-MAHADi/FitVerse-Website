@@ -50,7 +50,7 @@ const BecomeTrainer = () => {
     };
 
     try {
-      const res = await axios.post("http://localhost:5000/become-trainer", trainerData);
+      const res = await axios.post("https://fit-verse-server-nine.vercel.app/become-trainer", trainerData);
       if (res.data.insertedId) {
         Swal.fire({
           icon: "success",

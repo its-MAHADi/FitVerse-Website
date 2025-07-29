@@ -5,7 +5,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 
 const fetchReviews = async () => {
-  const { data } = await axios.get("http://localhost:5000/reviews");
+  const { data } = await axios.get("https://fit-verse-server-nine.vercel.app/reviews");
   return data;
 };
 

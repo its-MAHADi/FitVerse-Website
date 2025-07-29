@@ -29,7 +29,7 @@ const AuthProvider = ({ children }) => {
           const updatedUser = { ...auth.currentUser };
 
           // Backend এ save করবো default role = member
-          fetch("http://localhost:5000/users", {
+          fetch("https://fit-verse-server-nine.vercel.app/users", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -58,7 +58,7 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider).then((result) => {
       // Save user in backend with default role
-      fetch("http://localhost:5000/users", {
+      fetch("https://fit-verse-server-nine.vercel.app/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -84,7 +84,7 @@ const AuthProvider = ({ children }) => {
       if (currentUser?.email) {
         try {
           // Fetch role from backend
-          const res = await fetch(`http://localhost:5000/users/${currentUser.email}`);
+          const res = await fetch(`https://fit-verse-server-nine.vercel.app/users/${currentUser.email}`);
           const data = await res.json();
 
           if (data?.role) {

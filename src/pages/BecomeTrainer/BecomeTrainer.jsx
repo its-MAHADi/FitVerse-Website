@@ -1,19 +1,19 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import Select from "react-select";
 import Swal from "sweetalert2";
 import axios from "axios";
 import StickyNavbar from "../Shared/Navbar/StickyNavbar";
-import UseAuth from "../../Hooks/UseAuth";  // AuthContext থেকে ইউজার ইমেইল নিচ্ছি
-
+import UseAuth from "../../Hooks/UseAuth"; // AuthContext থেকে ইউজার ইমেইল নিচ্ছি
 
 const BecomeTrainer = () => {
-  const { user } = UseAuth()
+  const { user } = UseAuth();
 
   const [formData, setFormData] = useState({
     fullName: "",
     email: user?.email || "",
     age: "",
     image: "",
+    experience: "", // Experience যোগ করা হলো
     skills: [],
     availableDays: [],
     availableTime: "",
@@ -30,13 +30,7 @@ const BecomeTrainer = () => {
     { value: "Sat", label: "Saturday" },
   ];
 
-  const skillsList = [
-    "Yoga",
-    "Zumba",
-    "Strength Training",
-    "Cardio",
-    "Pilates",
-  ];
+  const skillsList = ["Yoga", "Zumba", "Strength Training", "Cardio", "Pilates"];
 
   const handleSkillChange = (skill) => {
     setFormData((prev) => {
@@ -56,10 +50,7 @@ const BecomeTrainer = () => {
     };
 
     try {
-      const res = await axios.post(
-        "http://localhost:5000/become-trainer",
-        trainerData
-      );
+      const res = await axios.post("http://localhost:5000/become-trainer", trainerData);
       if (res.data.insertedId) {
         Swal.fire({
           icon: "success",
@@ -72,6 +63,7 @@ const BecomeTrainer = () => {
           email: user?.email || "",
           age: "",
           image: "",
+          experience: "",
           skills: [],
           availableDays: [],
           availableTime: "",
@@ -97,15 +89,11 @@ const BecomeTrainer = () => {
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Full Name */}
           <div>
-            <label className="block text-gray-700 font-medium mb-1">
-              Full Name
-            </label>
+            <label className="block text-gray-700 font-medium mb-1">Full Name</label>
             <input
               type="text"
               value={formData.fullName}
-              onChange={(e) =>
-                setFormData({ ...formData, fullName: e.target.value })
-              }
+              onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
               className="w-full border p-3 rounded-md"
               required
             />
@@ -128,9 +116,20 @@ const BecomeTrainer = () => {
             <input
               type="number"
               value={formData.age}
-              onChange={(e) =>
-                setFormData({ ...formData, age: e.target.value })
-              }
+              onChange={(e) => setFormData({ ...formData, age: e.target.value })}
+              className="w-full border p-3 rounded-md"
+              required
+            />
+          </div>
+
+          {/* Experience */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-1">Experience (in years)</label>
+            <input
+              type="number"
+              placeholder="e.g., 3"
+              value={formData.experience}
+              onChange={(e) => setFormData({ ...formData, experience: e.target.value })}
               className="w-full border p-3 rounded-md"
               required
             />
@@ -138,15 +137,11 @@ const BecomeTrainer = () => {
 
           {/* Profile Image */}
           <div>
-            <label className="block text-gray-700 font-medium mb-1">
-              Profile Image URL
-            </label>
+            <label className="block text-gray-700 font-medium mb-1">Profile Image URL</label>
             <input
               type="url"
               value={formData.image}
-              onChange={(e) =>
-                setFormData({ ...formData, image: e.target.value })
-              }
+              onChange={(e) => setFormData({ ...formData, image: e.target.value })}
               className="w-full border p-3 rounded-md"
               required
             />
@@ -154,9 +149,7 @@ const BecomeTrainer = () => {
 
           {/* Skills */}
           <div>
-            <label className="block text-gray-700 font-medium mb-1">
-              Skills
-            </label>
+            <label className="block text-gray-700 font-medium mb-1">Skills</label>
             <div className="flex flex-wrap gap-3">
               {skillsList.map((skill) => (
                 <label key={skill} className="flex items-center gap-2">
@@ -173,32 +166,24 @@ const BecomeTrainer = () => {
 
           {/* Available Days */}
           <div>
-            <label className="block text-gray-700 font-medium mb-1">
-              Available Days
-            </label>
+            <label className="block text-gray-700 font-medium mb-1">Available Days</label>
             <Select
               options={daysOptions}
               isMulti
               value={formData.availableDays}
-              onChange={(selected) =>
-                setFormData({ ...formData, availableDays: selected })
-              }
+              onChange={(selected) => setFormData({ ...formData, availableDays: selected })}
               className="w-full"
             />
           </div>
 
           {/* Available Time */}
           <div>
-            <label className="block text-gray-700 font-medium mb-1">
-              Available Time
-            </label>
+            <label className="block text-gray-700 font-medium mb-1">Available Time</label>
             <input
               type="text"
               placeholder="e.g., 10 AM - 5 PM"
               value={formData.availableTime}
-              onChange={(e) =>
-                setFormData({ ...formData, availableTime: e.target.value })
-              }
+              onChange={(e) => setFormData({ ...formData, availableTime: e.target.value })}
               className="w-full border p-3 rounded-md"
               required
             />
@@ -206,14 +191,10 @@ const BecomeTrainer = () => {
 
           {/* Other Info */}
           <div>
-            <label className="block text-gray-700 font-medium mb-1">
-              Other Info
-            </label>
+            <label className="block text-gray-700 font-medium mb-1">Other Info</label>
             <textarea
               value={formData.otherInfo}
-              onChange={(e) =>
-                setFormData({ ...formData, otherInfo: e.target.value })
-              }
+              onChange={(e) => setFormData({ ...formData, otherInfo: e.target.value })}
               className="w-full border p-3 rounded-md"
               rows="4"
             />

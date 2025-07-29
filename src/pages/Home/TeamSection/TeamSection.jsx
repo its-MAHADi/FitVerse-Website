@@ -4,24 +4,24 @@ import { FaFacebookF, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 const trainers = [
   {
     id: 1,
-    name: "John Smith",
+    name: "Mahadi Hasan",
     expertise: "Strength Training",
     bio: "John has 10+ years of experience helping athletes achieve peak performance.",
     photo: "https://i.ibb.co/pvV3cKkj/mahadi.jpg",
   },
   {
     id: 2,
-    name: "Emily Johnson",
+    name: "Jhankar Mahbub",
     expertise: "Yoga & Wellness",
     bio: "Emily is a certified yoga instructor specializing in mindfulness and flexibility.",
-    photo: "https://i.ibb.co/dfDNrSx/trainer2.jpg",
+    photo: "https://i.ibb.co/DHNdMprV/jhankar.jpg",
   },
   {
     id: 3,
-    name: "Michael Lee",
+    name: "Nadir on The Go",
     expertise: "Cardio & HIIT",
     bio: "Michael’s HIIT sessions are designed to burn maximum calories in minimal time.",
-    photo: "https://i.ibb.co/jGRt5S0/trainer3.jpg",
+    photo: "https://i.ibb.co/tMz5tYrn/nadiron.jpg",
   },
 ];
 

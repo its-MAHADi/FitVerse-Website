@@ -6,7 +6,7 @@ import { FaCalendarAlt } from "react-icons/fa";
 
 const fetchCommunityPosts = async () => {
   const { data } = await axios.get("http://localhost:5000/communityPosts");
-  return data;
+  return data || [];
 };
 
 const LatestCommunity = () => {
@@ -24,14 +24,14 @@ const LatestCommunity = () => {
   }
 
   const latestPosts = [...posts]
-    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    .sort((a, b) => new Date(b?.createdAt) - new Date(a?.createdAt))
     .slice(0, 6);
 
   return (
     <section className="py-8">
       <div className="max-w-6xl mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8 text-blue-600">
-         <span className="text-black"> Latest</span> Community Posts
+          <span className="text-black"> Latest</span> Community Posts
         </h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {latestPosts.map((post) => (
@@ -42,32 +42,37 @@ const LatestCommunity = () => {
               {/* Image */}
               <div className="overflow-hidden">
                 <img
-                  src={post.image}
-                  alt={post.title}
+                  src={post?.image || "https://via.placeholder.com/300x200"}
+                  alt={post?.title || "Community Post"}
                   className="w-full h-52 object-cover transform hover:scale-110 transition-transform duration-300"
                 />
               </div>
 
               {/* Content */}
               <div className="p-5">
-                {/* Name & Country + Date */}
                 <div className="flex justify-between items-center mb-2">
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-800">{post.author}</h3>
-                    <p className="text-sm text-gray-500">{post.country}</p>
+                    <h3 className="text-lg font-semibold text-gray-800">
+                      {post?.author || "Unknown Author"}
+                    </h3>
+                    <p className="text-sm text-gray-500">{post?.country || "Unknown Country"}</p>
                   </div>
                   <div className="flex items-center text-gray-500 text-sm">
                     <FaCalendarAlt className="mr-1 text-blue-600" />
-                    {new Date(post.createdAt).toLocaleDateString()}
+                    {post?.createdAt
+                      ? new Date(post.createdAt).toLocaleDateString()
+                      : "N/A"}
                   </div>
                 </div>
 
-                {/* Description with inline Read More */}
-                 <h3 className="text-[15px] font-bold mb-2 text-gray-800">
-                  {post.title}
-                  </h3>
+                {/* Title */}
+                <h3 className="text-[15px] font-bold mb-2 text-gray-800">
+                  {post?.title || "Untitled Post"}
+                </h3>
+
+                {/* Description */}
                 <p className="text-sm text-gray-600 mb-4">
-                  {post.description.length > 70 ? (
+                  {post?.description && post.description.length > 70 ? (
                     <>
                       {post.description.slice(0, 70)}...
                       <Link
@@ -78,7 +83,7 @@ const LatestCommunity = () => {
                       </Link>
                     </>
                   ) : (
-                    post.description
+                    post?.description || "No description available"
                   )}
                 </p>
               </div>

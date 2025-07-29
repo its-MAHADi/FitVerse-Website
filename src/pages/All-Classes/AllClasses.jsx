@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router";
 import axios from "axios";
+import UseAuth from "../../Hooks/UseAuth";
 
 const AllClasses = () => {
+  const {user} = UseAuth();
   const [classes, setClasses] = useState([]);
+  const [trainers, setTrainers] = useState([]); // all trainers
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [search, setSearch] = useState(""); // search state
+  const [search, setSearch] = useState(""); 
   const limit = 6;
 
   // Fetch Classes
@@ -22,15 +25,30 @@ const AllClasses = () => {
       .catch((err) => console.error("Error fetching classes:", err));
   };
 
+  // Fetch Trainers
+  const fetchTrainers = () => {
+    axios
+      .get("http://localhost:5000/trainers")
+      .then((res) => setTrainers(res.data))
+      .catch((err) => console.error("Error fetching trainers:", err));
+  };
+
   useEffect(() => {
     fetchClasses();
   }, [currentPage, search]);
+
+  useEffect(() => {
+    fetchTrainers();
+  }, []);
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
     }
   };
+
+  // Helper to find trainer details by ID
+  const getTrainerById = (id) => trainers.find((t) => t._id === id);
 
   return (
     <div>
@@ -73,24 +91,28 @@ const AllClasses = () => {
                 {/* Trainers */}
                 <h4 className="font-medium text-gray-700 mb-2">Trainers:</h4>
                 <div className="flex gap-3">
-                  {cls.trainers?.slice(0, 5).map((trainer) => (
-                    <div key={trainer.id} className="relative group">
-                      <Link
-                        to={`/trainer/${trainer.id}`}
-                        className="block w-12 h-12 rounded-full overflow-hidden border hover:scale-105 transition"
-                      >
-                        <img
-                          src={trainer.image}
-                          alt={trainer.name}
-                          className="w-full h-full object-cover"
-                        />
-                      </Link>
-                      {/* Trainer Name on hover */}
-                      <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-medium text-gray-800 opacity-0 group-hover:opacity-100 transition">
-                        {trainer.name}
+                  {cls.trainers?.slice(0, 5).map((trainerId) => {
+                    const trainer = getTrainerById(trainerId);
+                    if (!trainer) return null;
+                    return (
+                      <div key={trainer._id} className="relative group">
+                        <Link
+                          to={`/trainer/${trainer._id}`}
+                          className="block w-12 h-12 rounded-full overflow-hidden border hover:scale-105 transition"
+                        >
+                          <img
+                            src={trainer.image}
+                            alt={trainer.name}
+                            className="w-full h-full object-cover"
+                          />
+                        </Link>
+                        {/* Trainer Name on hover */}
+                        <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-medium text-gray-800 opacity-0 group-hover:opacity-100 transition whitespace-nowrap">
+                          {trainer.name}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             </div>

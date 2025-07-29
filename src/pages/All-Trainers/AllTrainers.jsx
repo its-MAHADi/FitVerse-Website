@@ -42,19 +42,19 @@ const AllTrainers = () => {
               {/* Social Icons */}
               <div className="absolute bottom-3 left-3 flex gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300">
                 <a
-                  href={trainer.social.facebook}
+                  href=""
                   className="bg-blue-600 p-2 rounded-full text-white hover:bg-blue-800"
                 >
                   <FaFacebookF />
                 </a>
                 <a
-                  href={trainer.social.linkedin}
+                  href=""
                   className="bg-blue-600 p-2 rounded-full text-white hover:bg-blue-800"
                 >
                   <FaLinkedinIn />
                 </a>
                 <a
-                  href={trainer.social.instagram}
+                  href=""
                   className="bg-blue-600 p-2 rounded-full text-white hover:bg-blue-800"
                 >
                   <FaInstagram />
@@ -73,14 +73,19 @@ const AllTrainers = () => {
               <h3 className="text-lg font-semibold text-gray-900 mb-2">{trainer.name}</h3>
 
               {/* Available Slots */}
-              <p className="text-blue-600 font-medium mb-2">Available Slots:</p>
-              <ul className="space-y-1 mb-4">
-                {trainer.slots.slice(0, 2).map((slot, idx) => (
-                  <li key={idx} className="flex items-center gap-2 text-gray-700 text-sm">
-                    <FaClock className="text-blue-500" /> {slot}
-                  </li>
-                ))}
-              </ul>
+             <p className="text-blue-600 font-medium mb-2">Available Slots:</p>
+<ul className="space-y-1 mb-4">
+  {Array.isArray(trainer.slots) && trainer.slots.length > 0 ? (
+    trainer.slots.slice(0, 2).map((slot, idx) => (
+      <li key={idx} className="flex items-center gap-2 text-gray-700 text-sm">
+        <FaClock className="text-blue-500" /> {slot}
+      </li>
+    ))
+  ) : (
+    <li className="text-gray-500 text-sm">No slots available</li>
+  )}
+</ul>
+
 
               {/* Know More Button */}
               <Link

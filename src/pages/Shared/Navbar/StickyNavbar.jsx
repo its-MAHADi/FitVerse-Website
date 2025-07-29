@@ -29,7 +29,7 @@ const StickyNavbar = () => {
           <NavLink  className={({isActive})=>(isActive? "bg-blue-600 px-2 py-1 rounded-md text-white" : "")} to="/all-trainers">All Trainers</NavLink>
           <NavLink  className={({isActive})=>(isActive? "bg-blue-600 px-2 py-1 rounded-md text-white" : "")} to="/all-classes">All Classes</NavLink>
           <NavLink  className={({isActive})=>(isActive? "bg-blue-600 px-2 py-1 rounded-md text-white" : "")} to="/community">Community</NavLink>
-          {/* <NavLink  className={({isActive})=>(isActive? "bg-blue-600 px-2 py-1 rounded-md text-white" : "")} to="/"> Dashboard</NavLink> */}
+          <NavLink  className={({isActive})=>(isActive? "bg-blue-600 px-2 py-1 rounded-md text-white" : "")} to="/dashboard"> Dashboard</NavLink>
     </ul>
   );
   return (

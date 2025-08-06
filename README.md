@@ -54,8 +54,8 @@ FitVerse is a full-featured MERN stack fitness platform where users can sign up 
 ## 🌍 Live Website
 
 👉 [Live Demo](https://fitverse-c4822.web.app/)  
-👉 [Server Repo](https://github.com/your-username/fit-verse-server)  
-👉 [Client Repo](https://github.com/your-username/fit-verse-client)
+👉 [Server Repo](https://github.com/its-MAHADi/FitVerse-Website-Server)  
+👉 [Client Repo](https://github.com/its-MAHADi/FitVerse-Website)
 
 ---
 

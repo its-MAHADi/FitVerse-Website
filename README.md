@@ -1,12 +1,61 @@
-# React + Vite
+# 🏋️‍♂️ FitVerse - Fitness Tracker & Community Forum
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+FitVerse is a full-featured MERN stack fitness platform where users can sign up as **Admins**, **Trainers**, or **Members**. It includes booking training sessions, managing classes, making payments, and engaging with a dynamic **community forum** that supports posts, voting, and image sharing.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+### ✅ Authentication
+- Firebase Authentication (Login, Register)
+- Role-based access (Admin, Trainer, Member)
+- Private & Protected Routes
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 🧑‍🏫 Trainer Features
+- Apply to become a trainer
+- Create and manage classes
+- See booked sessions
+
+### 🧍‍♂️ Member Features
+- Browse and book training classes
+- Stripe-based payment integration
+- View and manage enrolled classes
+
+### 🛠 Admin Features
+- Promote/Demote users to/from Admin
+- Approve/Reject Trainer Applications
+- View platform balance & newsletter
+
+### 💬 Community Forum
+- Add forum posts with **title, description, country & image**
+- Upvote/Downvote other posts
+- Paginated forum with post details
+- Comment and discuss
+
+---
+
+## 📸 Tech Stack
+
+| Tech              | Usage                           |
+|------------------|----------------------------------|
+| **React.js**      | Frontend UI                     |
+| **Node.js & Express** | Backend API & Routing      |
+| **MongoDB**       | Database for storing users, posts, classes |
+| **Firebase Auth** | Authentication & Role Handling  |
+| **Stripe**        | Payment Gateway                 |
+| **Tailwind CSS**  | UI Styling                      |
+| **Axios**         | HTTP Client                     |
+| **JWT**           | Protected Backend Routes        |
+| **React Router v6** | Routing and Private Routes    |
+| **Multer + Cloudinary** | Forum image upload       |
+
+---
+
+## 🌍 Live Website
+
+👉 [Live Demo](https://fitverse-c4822.web.app/)  
+👉 [Server Repo](https://github.com/your-username/fit-verse-server)  
+👉 [Client Repo](https://github.com/your-username/fit-verse-client)
+
+---
+

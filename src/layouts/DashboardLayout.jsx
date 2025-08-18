@@ -1,7 +1,7 @@
 import { Outlet, NavLink, useNavigate } from "react-router";
 import UseAuth from "../Hooks/UseAuth";
 import { useState } from "react";
-import { Menu, X, Home, LogOut, Users, Mail, Wallet, Plus, ClipboardList, Activity } from "lucide-react";
+import { Menu, X, Home, LogOut, Users, Mail, Wallet, Plus, ClipboardList, Activity, ActivityIcon, } from "lucide-react";
 
 const DashboardLayout = () => {
   const { user, logOut } = UseAuth();
@@ -42,6 +42,9 @@ const DashboardLayout = () => {
         <nav className="flex flex-col gap-2">
           {user?.role === "admin" && (
             <>
+             <NavLink to="/dashboard/admin/overview" className={linkClasses}>
+               <ActivityIcon className="w-4 h-4" /> Overview
+            </NavLink>
               <NavLink to="/dashboard/admin/newsletter" className={linkClasses}>
                 <Mail className="w-4 h-4" /> Newsletter
               </NavLink>

@@ -30,6 +30,7 @@ import AdminManageUsers from "../pages/Dashboard/Admin/AdminManageUsers/AdminMan
 import AdminUserDetails from "../pages/Dashboard/Admin/AdminManageUsers/AdminUserDetails";
 import TrainerApplicationDetails from "../pages/Dashboard/Admin/TrainerApplicationDetails";
 import PrivetRoutes from "../routes/PrivetRoutes";
+import Overview from "../pages/Dashboard/Admin/Overview";
 
 
 export const router = createBrowserRouter([
@@ -120,6 +121,14 @@ export const router = createBrowserRouter([
     ),
     children: [
       // ================= ADMIN ROUTES =================
+      {
+        path: "admin/overview",
+        element: (
+        <AdminRoute>
+        <Overview />
+        </AdminRoute>
+          ),
+       },
       {
         path: "admin/newsletter",
         element: (

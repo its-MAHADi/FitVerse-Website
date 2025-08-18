@@ -102,7 +102,7 @@ const AddClass = () => {
             type="file"
             accept="image/*"
             onChange={handleImageUpload}
-            className="w-full"
+            className="w-full border px-1 py-1 bg-gray-200 cursor-pointer"
           />
           {previewImage && (
             <img

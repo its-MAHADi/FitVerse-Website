@@ -1,10 +1,10 @@
-import React, { useEffect, useState, } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios"; 
 import { Link } from "react-router";
-import UseAuth from "../../Hooks/UseAuth"; // ধরে নিচ্ছি লগইন কনটেক্সট আছে
+import UseAuth from "../../Hooks/UseAuth"; 
 
 const Community = () => {
-  const { user } = UseAuth() // লগইন ইউজার
+  const { user } = UseAuth(); 
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -52,7 +52,9 @@ const Community = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      <h2 className="text-3xl font-bold text-center text-blue-600 mb-8">Community Forum</h2>
+      <h2 className="text-3xl font-bold text-center text-blue-600 mb-8">
+        Community Forum
+      </h2>
 
       {/* Posts Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -61,8 +63,28 @@ const Community = () => {
             key={post._id}
             className="bg-white border rounded-lg shadow hover:shadow-lg p-5"
           >
+            {/* Image */}
+            {post.image && (
+              <img
+                src={post.image}
+                alt={post.title}
+                className="w-full h-48 object-cover rounded mb-4"
+              />
+            )}
+
             <h3 className="text-xl font-bold text-gray-800 mb-2">{post.title}</h3>
-            {/* <p className="text-gray-600 mb-4">{post.content.slice(0, 100)}...</p> */}
+
+            {/* Description */}
+            {post.description && (
+              <p className="text-gray-600 mb-2">{post.description}</p>
+            )}
+
+            {/* Country */}
+            {post.country && (
+              <p className="text-gray-500 mb-4 font-semibold">
+                Country: {post.country}
+              </p>
+            )}
 
             <div className="flex justify-between items-center">
               {/* Voting */}

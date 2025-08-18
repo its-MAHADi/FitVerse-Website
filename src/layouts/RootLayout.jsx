@@ -5,7 +5,7 @@ import StickyNavbar from '../pages/Shared/Navbar/StickyNavbar'
 
 const RootLayout = () => {
   return (
-    <div className='max-w-7xl mx-auto'>
+    <div>
       <StickyNavbar></StickyNavbar>
      <div className='min-h-[calc(100vh-471px)] max-w-7xl mx-auto'>
        <Outlet></Outlet>
